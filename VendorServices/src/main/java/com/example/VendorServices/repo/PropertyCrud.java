@@ -17,6 +17,9 @@ public interface PropertyCrud extends JpaRepository<PropertyModel,Integer> {
     @Query(value = "select count(property_amenities_id) from property_amenities where property_amenities_id = ?1",nativeQuery = true)
     int findByPropertyAmenitiesID(int propertyamenitiesId);
 
+    @Query(value = "select * from property LIMIT 6",nativeQuery = true)
+    List<PropertyModel> findHomeProperty();
+
     @Transactional
     @Modifying
     @Query(value = "delete from property_amenities where property_amenities_id = ?1",nativeQuery = true)
@@ -45,4 +48,6 @@ public interface PropertyCrud extends JpaRepository<PropertyModel,Integer> {
     @Modifying
     @Query(value = "delete from property where property_id = ?1",nativeQuery = true)
     int deleteByPropertyID(int PropertyId);
+
+
 }

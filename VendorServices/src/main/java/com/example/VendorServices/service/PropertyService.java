@@ -25,7 +25,18 @@ public class PropertyService {
     public ResponseEntity<List<PropertyModel>> findAllProperty() {
         try {
             List<PropertyModel> model = propertyCrud.findAll();
-            responseResult = new ResponseResult(true, "All City");
+            responseResult = new ResponseResult(true, "All Property");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        } catch (Exception e) {
+            responseResult = new ResponseResult(false, "No Records Found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<List<PropertyModel>> findHomeProperty() {
+        try {
+            List<PropertyModel> model = propertyCrud.findHomeProperty();
+            responseResult = new ResponseResult(true, "All Property");
             return ResponseEntity.status(HttpStatus.OK).body(model);
         } catch (Exception e) {
             responseResult = new ResponseResult(false, "No Records Found!");

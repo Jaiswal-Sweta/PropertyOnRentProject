@@ -13,8 +13,8 @@ import java.time.LocalTime;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/login")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginController {
 
     @Autowired

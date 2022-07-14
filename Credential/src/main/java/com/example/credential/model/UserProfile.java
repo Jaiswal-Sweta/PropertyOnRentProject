@@ -12,4 +12,5 @@ public class UserProfile {
     private int pincode;
     private String cityName;
     private String stateName;
+    private int registrationId;
 }

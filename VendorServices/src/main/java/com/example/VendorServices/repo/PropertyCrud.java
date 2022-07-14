@@ -14,6 +14,9 @@ import java.util.List;
 
 public interface PropertyCrud extends JpaRepository<PropertyModel,Integer> {
 
+    @Query(value = "select * from property where registration_id = ?1",nativeQuery = true)
+    List<PropertyModel> findByVendorProperties(int vendorId);
+
     @Query(value = "select count(property_amenities_id) from property_amenities where property_amenities_id = ?1",nativeQuery = true)
     int findByPropertyAmenitiesID(int propertyamenitiesId);
 

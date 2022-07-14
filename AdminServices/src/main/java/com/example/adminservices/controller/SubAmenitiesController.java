@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/subamenities")
+@CrossOrigin(origins = "*")
 public class SubAmenitiesController {
 
     @Autowired

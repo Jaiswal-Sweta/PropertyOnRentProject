@@ -51,6 +51,7 @@ public class LoginService {
             userProfile.setCityName(registrationModel.getCityModel().getCityName());
             userProfile.setPincode(registrationModel.getPincode());
             userProfile.setStateName(registrationModel.getCityModel().getStateModel().getStateName());
+            userProfile.setRegistrationId(registrationModel.getRegistrationId());
             return ResponseEntity.status(HttpStatus.OK).body(userProfile);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
@@ -85,7 +86,8 @@ public class LoginService {
         RegistrationModel registerObj = registrationRepo.findById(registerationId).orElse(null);
         if (registerObj == null) return ResponseEntity.badRequest().body(new ResponseData(false, "Not Found..!"));
         else {
-            registerObj.setCityModel(regBodyObj.getCityModel());
+            System.out.println(regBodyObj.getCityModel());
+            registerObj.setCityModel (regBodyObj.getCityModel());
             registerObj.setContactNumber(regBodyObj.getContactNumber());
             registerObj.setEmailId(regBodyObj.getEmailId());
             registerObj.setFirstname(regBodyObj.getFirstname());

@@ -54,12 +54,12 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()// kind of attack
                 //don't authenticate this particular request.
-                .authorizeRequests().antMatchers("/registration/**", "/login/authentication").permitAll()
+                .authorizeRequests().antMatchers("/registration/**", "/login/authentication" , "/login/profile/**","/login/updateuser/**").permitAll()
                 //all other requests need to be authenticate
                 .antMatchers("/user/**").hasRole("User")
                 .antMatchers("/admin/**").hasRole("Admin")
                 .antMatchers("/vendor/**").hasRole("Vendor")
-                .antMatchers("/login/changepassword/**", "/login/updateuser/**", "/login/profile/**").hasAnyRole("Admin", "User", "Vendor")
+                .antMatchers("/login/changepassword/**").hasAnyRole("Admin", "User", "Vendor")
                 .anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //it's remain same when change state
 

@@ -23,6 +23,17 @@ public class PropertyService {
     @Autowired
     ResponseResult responseResult;
 
+    public ResponseEntity<List<PropertyModel>> findVendorProperties(int vendorId) {
+        try {
+            List<PropertyModel> model = propertyCrud.findByVendorProperties(vendorId);
+            responseResult = new ResponseResult(true, "All Vendor's Property");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        } catch (Exception e) {
+            responseResult = new ResponseResult(false, "No Records Found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     public ResponseEntity<List<PropertyModel>> findAllProperty() {
         try {
             List<PropertyModel> model = propertyCrud.findAll();
@@ -173,12 +184,12 @@ public class PropertyService {
 
     public ResponseEntity<ResponseResult> deletePropertyAmenities(int propertyamenitiesId)
     {
-          if(propertyCrud.findByPropertyAmenitiesID(propertyamenitiesId)!=0)
-          {
+        if(propertyCrud.findByPropertyAmenitiesID(propertyamenitiesId)!=0)
+        {
             propertyCrud.deleteByPropertyAmenitiesID(propertyamenitiesId);
             responseResult = new ResponseResult(true,"This Property Amenities are Deleted!");
             return ResponseEntity.ok(responseResult);
-          }
+        }
         responseResult = new ResponseResult(false,"This Property Amenities not exist!");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseResult);
     }

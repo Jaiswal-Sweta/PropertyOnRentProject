@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
@@ -16,10 +16,43 @@ public class PropertyController {
     @Autowired
     PropertyService propertyService;
 
+    @GetMapping("/vendorproperties/{vendorId}")
+    public ResponseEntity<List<PropertyModel>> getVendorProperties(@PathVariable int vendorId) {return propertyService.findVendorProperties(vendorId);}
+
     @GetMapping("/getall")
     public ResponseEntity<List<PropertyModel>> getAllProperty()
     {
         return propertyService.findAllProperty();
+    }
+
+    @GetMapping("/getall/{id}")
+    public Iterable<PropertyModel> getDetailProperty(@PathVariable int id)
+    {
+        return propertyService.findDetailProperty(id);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<PropertyModel>> getHomeProperty()
+    {
+        return propertyService.findHomeProperty();
+    }
+
+    @GetMapping("/getlatestproperty")
+    public ResponseEntity<List<PropertyModel>> getLatestProperty()
+    {
+        return propertyService.findLatestProperty();
+    }
+
+    @GetMapping("/getpropertypricewise/{optionvalue}")
+    public ResponseEntity<List<PropertyModel>> getPropertyHighToLowPrice(@PathVariable int optionvalue)
+    {
+        return propertyService.findPropertyPricewise(optionvalue);
+    }
+
+    @GetMapping("/getproperty/{propertytypeid}/{cityid}")
+    public ResponseEntity<List<PropertyModel>> getPropertyHighToLowPrice(@PathVariable int propertytypeid,@PathVariable int cityid)
+    {
+        return propertyService.findProperty(propertytypeid,cityid);
     }
 
     @PostMapping("/add")

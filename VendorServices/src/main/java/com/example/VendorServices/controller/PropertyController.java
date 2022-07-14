@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000/")
+
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
@@ -20,12 +20,6 @@ public class PropertyController {
     public ResponseEntity<List<PropertyModel>> getAllProperty()
     {
         return propertyService.findAllProperty();
-    }
-
-    @GetMapping("/get")
-    public ResponseEntity<List<PropertyModel>> getHomeProperty()
-    {
-        return propertyService.findHomeProperty();
     }
 
     @PostMapping("/add")

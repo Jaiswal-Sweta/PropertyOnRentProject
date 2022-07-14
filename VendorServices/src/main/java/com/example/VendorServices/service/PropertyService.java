@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,51 @@ public class PropertyService {
     public ResponseEntity<List<PropertyModel>> findHomeProperty() {
         try {
             List<PropertyModel> model = propertyCrud.findHomeProperty();
+            responseResult = new ResponseResult(true, "All Property");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        } catch (Exception e) {
+            responseResult = new ResponseResult(false, "No Records Found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
+    public ResponseEntity<List<PropertyModel>> findLatestProperty() {
+        try {
+            List<PropertyModel> model = propertyCrud.findLatestProperty();
+            responseResult = new ResponseResult(true, "All Property");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        } catch (Exception e) {
+            responseResult = new ResponseResult(false, "No Records Found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<List<PropertyModel>> findPropertyPricewise(int optionvalue) {
+        try {
+            List<PropertyModel> model=new ArrayList<PropertyModel>();
+            if(optionvalue==1)
+            {
+                model = propertyCrud.findAll();
+            }
+            else if(optionvalue==2)
+            {
+                model = propertyCrud.findPropertyLowToHighPrice();
+            }
+            else if(optionvalue==3)
+            {
+                model = propertyCrud.findPropertyHighToLowPrice();
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<List<PropertyModel>> findProperty(int propertytypeid,int cityid) {
+        try {
+            List<PropertyModel> model = propertyCrud.findProperty(propertytypeid,cityid);
             responseResult = new ResponseResult(true, "All Property");
             return ResponseEntity.status(HttpStatus.OK).body(model);
         } catch (Exception e) {
@@ -171,5 +217,9 @@ public class PropertyService {
         }
         responseResult = new ResponseResult(false,"This Property not exist!");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseResult);
+    }
+
+    public Iterable<PropertyModel> findDetailProperty(int id) {
+        return propertyCrud.findDetailProperty(id);
     }
 }

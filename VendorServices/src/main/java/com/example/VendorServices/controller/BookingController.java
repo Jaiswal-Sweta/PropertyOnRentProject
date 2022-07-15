@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/viewbooking")
 public class BookingController {
 
     @Autowired
     BookingService bookingService;
 
-    @GetMapping("/getall/ID")
-    public ResponseEntity<List<BookingModel>> getAllBookingList(@PathVariable int ID)
+    @GetMapping("/getall/{id}")
+    public ResponseEntity<List<BookingModel>> getAllBookingList(@PathVariable int id)
     {
-        return bookingService.FindBookedList(ID);
+        System.out.println("Id :"+id);
+        return bookingService.FindBookedList(id);
     }
 }

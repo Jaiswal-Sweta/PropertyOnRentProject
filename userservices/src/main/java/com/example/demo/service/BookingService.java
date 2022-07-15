@@ -33,6 +33,20 @@ public class BookingService {
         }
     }
 
+    public ResponseEntity<List<BookingModel>> BookedPropertyListSpecific(int userregistrationId)
+    {
+        try
+        {
+            List<BookingModel> model= bookingCrud.findBookedList(userregistrationId);
+            responseResult = new ResponseResult(true,"All Booked list of All Properties");
+            return ResponseEntity.status(HttpStatus.OK).body(model);
+        }catch(Exception e)
+        {
+            responseResult = new ResponseResult(false,"No Records Found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     public ResponseEntity<ResponseResult> SaveBooking(BookingModel bookingModel)
     {
         try{

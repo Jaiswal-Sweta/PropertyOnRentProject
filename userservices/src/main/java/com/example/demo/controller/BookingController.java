@@ -17,13 +17,19 @@ public class BookingController {
     BookingService bookingService;
 
     @GetMapping("/getall")
-    public ResponseEntity<List<BookingModel>> GetAllAmenities()
+    public ResponseEntity<List<BookingModel>> GetAllBookingList()
     {
         return bookingService.BookedPropertyList();
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<List<BookingModel>> getBookingList(@PathVariable int id)
+    {
+        return bookingService.BookedPropertyListSpecific(id);
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<ResponseResult> SaveAmenities(@RequestBody BookingModel bookingModel)
+    public ResponseEntity<ResponseResult> SaveBooking(@RequestBody BookingModel bookingModel)
     {
         return bookingService.SaveBooking(bookingModel);
     }

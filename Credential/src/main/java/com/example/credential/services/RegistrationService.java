@@ -43,6 +43,7 @@ public class RegistrationService {
     public ResponseEntity<ResponseData> saveUser(RegistrationModel registrationModel) throws MessagingException, UnsupportedEncodingException {
         RegistrationModel registrationModelObject = registrationRepo.findByEmailId(registrationModel.getEmailId());
         if (registrationModelObject == null) {
+            System.out.println(registrationModel);
             otpChache().set("OTPCode", generateOTP.sendVerificationEmail(registrationModel.getEmailId(), registrationModel.getFirstname() + " " + registrationModel.getLastname()));
             setRegistrationModel = registrationModel;
             return ResponseEntity.ok(new ResponseData(true, "OTP sent successfully..!"));

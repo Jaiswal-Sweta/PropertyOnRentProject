@@ -29,7 +29,9 @@ public class BookingModel {
     private PropertyModel propertyModel;
 
     @OneToOne
-    @JoinColumn(name = "registrationId")
+    @JoinColumn(name = "userRegistrationId")
     private RegistrationModel registrationModel;
+
+    private int eventPackageId;
 
 }

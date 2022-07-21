@@ -34,4 +34,5 @@ public class BookingModel {
 
     private int eventPackageId;
 
+    private boolean isActive;
 }
